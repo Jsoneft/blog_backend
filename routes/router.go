@@ -21,5 +21,5 @@ func InitRouter()  {
 
 		// Category 模块路由接口
 	}
-	r.Run(utils.HttpPort)
+	_ = r.Run(utils.HttpPort)
 }

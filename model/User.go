@@ -27,7 +27,6 @@ func CheckUser(name string) int {
 
 // 添加用户
 func CreatUser(data *User) int {
-	data.Password = ScryptPw(data.Password)
 	if err := db.Create(&data).Error; err != nil {
 		return errmsg.ERROR
 	}
@@ -52,21 +51,43 @@ func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 
 }
 
-//编辑用户
-
+//编辑用户 (不能修改密码)
+func EditUser(id int, data *User) int {
+	var user User
+	var maps = make(map[string]interface{})
+	maps["username"] = data.Username
+	maps["role"] = data.Role
+	err = db.Model(&user).Where("id = ?", id).Updates(maps).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}
 
 //删除用户
-
+func DeleteUser(id int) int {
+	var user User
+	err = db.Where("id = ?", id).Delete(&user).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}
 
 //加密
-func ScryptPw(password string) string {
+func ScryptPw(password string) (string, error) {
 	const KeyLen = 10
-	salt := make([]byte, 8)
-	salt = []byte{114, 5, 71, 22, 41, 47, 81, 222}
+	salt := []byte{114, 5, 71, 22, 41, 47, 81, 222}
 	HashPw, err := scrypt.Key([]byte(password), salt, 1<<14, 8, 1, KeyLen)
 	if err != nil {
 		log.Fatal(err)
+		return "", err
 	}
 	fpw := base64.StdEncoding.EncodeToString(HashPw)
-	return fpw
+	return fpw, nil
+}
+
+func (user *User) BeforeSave(tx *gorm.DB) (err error) {
+	user.Password, err = ScryptPw(user.Password)
+	return err
 }
