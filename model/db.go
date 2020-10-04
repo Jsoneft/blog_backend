@@ -21,7 +21,10 @@ func InitDb() {
 	if err != nil {
 		fmt.Println("获取DBcopy 出错", err)
 	}
-	db.AutoMigrate(&User{}, &Article{}, &Category{})
+	err = db.AutoMigrate(&User{}, &Article{}, &Category{})
+	if err != nil{
+		fmt.Println("数据库迁移出错",err)
+	}
 	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
 	sqlDB.SetMaxIdleConns(10)
 
@@ -31,6 +34,9 @@ func InitDb() {
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
 	sqlDB.SetConnMaxLifetime(10 * time.Second)
 
-	sqlDB.Close()
+	//err = sqlDB.Close()
+	//if err != nil{
+	//	fmt.Println("数据库关闭出错",err)
+	//}
 
 }

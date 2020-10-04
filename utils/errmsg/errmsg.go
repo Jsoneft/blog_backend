@@ -28,8 +28,8 @@ var CodeMsg = map[int]string{
 	ERROR_PASSWORD_WRONG:   "密码错误！",
 	ERROR_USER_NOT_EXIST:   "用户不存在！",
 	ERROR_TOKEN_EXIST:      "TOKEN 不存在！",
-	ERROR_TOKEN_RUNTIME:    "TOKEN已过期！",
-	ERROR_TOKEN_WRONG:      "TOKEN不正确！",
+	ERROR_TOKEN_RUNTIME:    "TOKEN 已过期！",
+	ERROR_TOKEN_WRONG:      "TOKEN 不正确！",
 	ERROR_TOKEN_TYPE_WRONG: "TOKEN 格式错误！",
 }
 
