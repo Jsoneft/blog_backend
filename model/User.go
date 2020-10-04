@@ -1,8 +1,11 @@
 package model
 
 import (
+	"encoding/base64"
 	"ginblog_backend/utils/errmsg"
+	"golang.org/x/crypto/scrypt"
 	"gorm.io/gorm"
+	"log"
 )
 
 type User struct {
@@ -24,6 +27,7 @@ func CheckUser(name string) int {
 
 // 添加用户
 func CreatUser(data *User) int {
+	data.Password = ScryptPw(data.Password)
 	if err := db.Create(&data).Error; err != nil {
 		return errmsg.ERROR
 	}
@@ -50,4 +54,19 @@ func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 
 //编辑用户
 
+
 //删除用户
+
+
+//加密
+func ScryptPw(password string) string {
+	const KeyLen = 10
+	salt := make([]byte, 8)
+	salt = []byte{114, 5, 71, 22, 41, 47, 81, 222}
+	HashPw, err := scrypt.Key([]byte(password), salt, 1<<14, 8, 1, KeyLen)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fpw := base64.StdEncoding.EncodeToString(HashPw)
+	return fpw
+}
