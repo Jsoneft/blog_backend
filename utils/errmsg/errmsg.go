@@ -19,18 +19,22 @@ const (
 	// code = 2000... 文章模块错误
 
 	// code = 3000...  分类模块错误
+	ERROR_CATEGORYNAME_EXIST = 3001
 )
 
 var CodeMsg = map[int]string{
-	SUCCESS:                "OK",
-	ERROR:                  "FAIL",
-	ERROR_USERNAME_USED:    "用户名已存在！",
-	ERROR_PASSWORD_WRONG:   "密码错误！",
-	ERROR_USER_NOT_EXIST:   "用户不存在！",
+	SUCCESS:              "OK",
+	ERROR:                "FAIL",
+	ERROR_USERNAME_USED:  "用户名已存在！",
+	ERROR_PASSWORD_WRONG: "密码错误！",
+	ERROR_USER_NOT_EXIST: "用户不存在！",
+
 	ERROR_TOKEN_EXIST:      "TOKEN 不存在！",
 	ERROR_TOKEN_RUNTIME:    "TOKEN 已过期！",
 	ERROR_TOKEN_WRONG:      "TOKEN 不正确！",
 	ERROR_TOKEN_TYPE_WRONG: "TOKEN 格式错误！",
+
+	ERROR_CATEGORYNAME_EXIST: "分类名已存在",
 }
 
 func GetErrMsg(code int) string {

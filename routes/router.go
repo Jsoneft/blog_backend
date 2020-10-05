@@ -20,6 +20,11 @@ func InitRouter()  {
 		// Article 模块路由接口
 
 		// Category 模块路由接口
+		Rv1.POST("category/add", v1.AddCategory)
+		Rv1.GET("categories", v1.GetCategories)
+		Rv1.PUT("category/:id", v1.EditCategory)
+		Rv1.DELETE("category/:id", v1.DeleteCategory)
+
 	}
 	_ = r.Run(utils.HttpPort)
 }
