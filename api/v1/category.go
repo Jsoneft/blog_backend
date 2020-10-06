@@ -51,7 +51,7 @@ func GetCategories(c *gin.Context) {
 	})
 }
 
-// 编辑分类
+// 编辑分类名
 func EditCategory(c *gin.Context) {
 	var data model.Category
 	_ = c.ShouldBindJSON(&data)
@@ -79,3 +79,6 @@ func DeleteCategory(c *gin.Context) {
 		"message": errmsg.GetErrMsg(code),
 	})
 }
+
+
+// todo 查询分类下的所有文章
