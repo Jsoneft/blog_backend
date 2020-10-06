@@ -2,10 +2,11 @@ package model
 
 import (
 	"ginblog_backend/utils/errmsg"
+	"gorm.io/gorm"
 )
 
 type Category struct {
-	//gorm.Model
+	gorm.Model
 	Name string `gorm:"type:varchar(20);not null" json:"name"`
 	ID   uint   `gorm:"primary_key;auto_increment" json:"id"`
 }
