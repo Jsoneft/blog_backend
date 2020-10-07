@@ -25,6 +25,30 @@ func AddArticle(c *gin.Context) {
 // todo 查询单个文章
 
 // todo 查询文章列表
+func GetArticles(c *gin.Context) {
+	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
+	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
+	title := c.Query("title")
+
+	switch {
+	case pageSize >= 100:
+		pageSize = 100
+	case pageSize <= 0:
+		pageSize = 1
+	}
+
+	if pageNum == 0 {
+		pageNum = 1
+	}
+
+	data, code, total := model.GetArticles(title, pageSize, pageNum)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"total":   total,
+		"message": errmsg.GetErrMsg(code),
+	})
+}
 
 // 编辑文章
 func EditArticle(c *gin.Context) {
