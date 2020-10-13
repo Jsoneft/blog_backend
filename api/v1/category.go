@@ -61,7 +61,7 @@ func EditCategory(c *gin.Context) {
 	if code == errmsg.SUCCESS {
 		model.EditCategory(id, &data)
 	}
-	if code == errmsg.ERROR_CATEGORYNAME_EXIST {
+	if code == errmsg.ERROR_CATE_NAME_EXIST {
 		c.Abort()
 	}
 	c.JSON(http.StatusOK, gin.H{

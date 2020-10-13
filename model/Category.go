@@ -16,7 +16,7 @@ func CheckCategoryName(CategoryName string) int {
 	var data Category
 	db.Select("id").Where("name = ?", CategoryName).First(&data)
 	if data.ID > 0 {
-		return errmsg.ERROR_CATEGORYNAME_EXIST
+		return errmsg.ERROR_CATE_NAME_EXIST
 	}
 	return errmsg.SUCCESS
 }
