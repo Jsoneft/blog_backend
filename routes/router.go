@@ -22,7 +22,7 @@ func InitRouter() {
 		Rv1.PUT("article/:id", v1.EditArticle)
 		Rv1.DELETE("article/:id", v1.DeleteArticle)
 		Rv1.GET("articles",v1.GetArticles)
-		Rv1.GET("article/list",v1.GetCateArt)
+		Rv1.GET("article/list/:id",v1.GetCateArt)
 		Rv1.GET("article/info/:id", v1.GetArtInfo)
 		// Category 模块路由接口
 		Rv1.POST("category/add", v1.AddCategory)

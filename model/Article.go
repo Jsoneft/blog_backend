@@ -24,25 +24,30 @@ func CreateArt(data *Article) int {
 	return errmsg.SUCCESS
 }
 
-// todo 查询单个文章
+// 查询单个文章
 func GetArtInfo(id int )(Article, int){
 	var art Article
+	// Mysql:'SELECT * FROM `articles` WHERE id = 3 AND `articles`.`deleted_at` IS NULL ORDER BY `articles`.`id` LIMIT 1'
 	err := db.Model(&art).Where("id = ?", id).First(&art).Error
-	// err = db.Preload("Category").Where("id = ?", id).First(&art).Error
+
+	// Mysql:'SELECT * FROM `articles` WHERE id = 3 AND `articles`.`deleted_at` IS NULL ORDER BY `articles`.`id` LIMIT 1'
+	//err = db.Preload("Category").Where("id = ?", id).First(&art).Error
+
 	if err != nil {
 		return art,errmsg.ERROR_ART_NOT_EXIST
 	}
 	return art,errmsg.SUCCESS
 }
 
-// todo 查询分类下所有文章
-func GetCateArt(id int,pageSize int, pageNum int) ([]Article, int) {
+//  查询分类下所有文章
+func GetCateArt(id int,pageSize int, pageNum int) ([]Article, int, int64) {
 	var articles []Article
-	err := db.Preload("Category").Limit(pageSize).Offset((pageNum - 1)*pageSize).Where("id = ?", id).Find(&articles).Error
+	var cnt int64
+	err := db.Preload("Category").Limit(pageSize).Offset((pageNum - 1)*pageSize).Where("cid = ?", id).Find(&articles).Count(&cnt).Error
 	if err != nil {
-		return nil,errmsg.ERROR_CATE_NOT_EXIST
+		return nil,errmsg.ERROR_CATE_NOT_EXIST,0
 	}
-	return articles, errmsg.SUCCESS
+	return articles, errmsg.SUCCESS,cnt
 }
 
 //  查询文章列表

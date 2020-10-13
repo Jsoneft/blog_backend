@@ -102,6 +102,7 @@ func EditArticle(c *gin.Context) {
 }
 
 // 删除文章
+
 func DeleteArticle(c *gin.Context) {
 	cid, _ := strconv.Atoi(c.Param("id"))
 	code = model.DeleteArticle(cid)
