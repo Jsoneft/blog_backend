@@ -91,3 +91,22 @@ func (user *User) BeforeSave(tx *gorm.DB) (err error) {
 	user.Password, err = ScryptPw(user.Password)
 	return err
 }
+
+
+// 登录验证
+
+func CheckLogin(username string,password string )int		  {
+	var user User
+	code := errmsg.SUCCESS
+	db.Where("username = ?", username).First(&user)
+	if user.ID == 0{
+		code = errmsg.ERROR_USER_NOT_EXIST
+	}
+	if submittedPW, _ := ScryptPw(password); submittedPW !=  user.Password{
+		code =  errmsg.ERROR_PASSWORD_WRONG
+	}
+	if user.Role != 0{
+		code = errmsg.ERROR_USER_NO_RIGHT
+	}
+	return code
+}

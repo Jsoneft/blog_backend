@@ -8,6 +8,7 @@ import (
 var (
 	AppMode  string
 	HttpPort string
+	JwtKey   string
 
 	Db         string
 	DbHost     string
@@ -20,18 +21,20 @@ var (
 func init() {
 	file, err := ini.Load("config/config.ini")
 	if err != nil {
-		fmt.Println("配置文件读取错误，请检查文件路径:",err)
+		fmt.Println("配置文件读取错误，请检查文件路径:", err)
 	}
 	LoadServer(file)
 	LoadData(file)
 }
 
-func LoadServer(file *ini.File)  {
+func LoadServer(file *ini.File) {
 	AppMode = file.Section("server").Key("AppMode").MustString("debug")
 	HttpPort = file.Section("server").Key("HttpPort").MustString(":3000")
+	JwtKey = file.Section("server").Key("JwtKey").MustString("zpBpgBdkg")
+
 }
 
-func LoadData(file *ini.File)  {
+func LoadData(file *ini.File) {
 	Db = file.Section("database").Key("Db").MustString("mysql")
 	DbHost = file.Section("database").Key("DbHost").MustString("cdb-gbwa3hlu.cd.tencentcdb.com")
 	DbPort = file.Section("database").Key("DbPort").MustString("10086")
