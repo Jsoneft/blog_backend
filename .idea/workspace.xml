@@ -20,13 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="add configs">
-      <change afterPath="$PROJECT_DIR$/configs/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/errcode/errcode.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/setting/section.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/setting/setting.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global/db.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global/setting.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/model/model.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/article_tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/article_tag.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/tag.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/setting/section.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/setting/section.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,5 +183,13 @@
         <entry key="GOPROXY" value="https://goproxy.cn,direct" />
       </map>
     </environment>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="global.ServerSetting" language="go" />
+        <watch expression="global.DatabaseSetting" language="go" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
