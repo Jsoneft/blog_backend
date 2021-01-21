@@ -1,6 +1,6 @@
 Server:
   RunMode: debug
-  HttpPort: 8080
+  HttpPort: 8000
   ReadTimeout: 60
   WriteTimeout: 60
 APP:
@@ -14,7 +14,6 @@ Database:
   Username: root
   Password: YBpJEmyw2snGj9!
   Host: cdb-gbwa3hlu.cd.tencentcdb.com
-  Port: 10086
   DBName: blog_service
   TablePrefix: blog_
   Charset: utf8

@@ -21,10 +21,9 @@ type AppSettingS struct {
 
 type DatabaseSettingS struct {
 	DBType       string
-	Username     string
-	Password     string
+	UserName     string
+	PassWord     string
 	Host         string
-	Port         string
 	DBName       string
 	TablePrefix  string
 	Charset      string
