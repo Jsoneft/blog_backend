@@ -1,9 +1,9 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import "ginblog_backend/pkg/app"
 
 type Article struct {
-	gorm.Model
+	*Model
 	Title         string `json:"title"`
 	Desc          string `json:"desc"`
 	Content       string `json:"content"`
@@ -13,5 +13,9 @@ type Article struct {
 
 func (a Article) TableName() string {
 	return "blog_article"
+}
 
+type ArticleSwagger struct {
+	List  []*Article
+	Pager *app.Pager
 }

@@ -1,15 +1,20 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
+	"ginblog_backend/pkg/app"
 )
 
 type Tag struct {
-	gorm.Model
+	*Model
 	Name  string `json:"name"`
 	State uint8  `json:"state"`
 }
 
 func (a Tag) TableName() string {
 	return "blog_tag"
+}
+
+type TagSwagger struct {
+	List  []*Tag
+	Pager *app.Pager
 }

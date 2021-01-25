@@ -1,9 +1,7 @@
 package model
 
-import "github.com/jinzhu/gorm"
-
 type ArticleTag struct {
-	gorm.Model
+	*Model
 	TagId     uint32 `json:"tag_id"`
 	ArticleId uint32 `json:"article_id"`
 }

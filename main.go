@@ -28,6 +28,9 @@ func init() {
 	}
 }
 
+// @title  博客系统
+// @version 0.1
+// @description 博客后端系统学习
 func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()

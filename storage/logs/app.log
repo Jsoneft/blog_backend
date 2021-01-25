@@ -1,3 +1,12 @@
 2021/01/22 16:42:19 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611304939730443000}
 2021/01/23 01:03:36 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611335016904078000}
 2021/01/23 01:04:40 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611335080238729000}
+2021/01/25 13:09:40 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611551380012108000}
+2021/01/25 14:14:34 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611555274985238000}
+2021/01/25 14:40:12 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611556812477830000}
+2021/01/25 18:18:00 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611569880350709000}
+2021/01/25 18:21:05 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611570065920694000}
+2021/01/25 18:22:53 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611570173734996000}
+2021/01/25 18:23:21 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611570201663900000}
+2021/01/25 18:38:20 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571100099403000}
+2021/01/25 18:48:02 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571682658103000}

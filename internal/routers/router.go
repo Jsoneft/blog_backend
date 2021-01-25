@@ -1,14 +1,18 @@
 package routers
 
 import (
+	_ "ginblog_backend/docs"
 	v1 "ginblog_backend/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 	tag := v1.NewTag()
 	article := v1.NewArticle()
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	apiv1 := r.Group("/api/v1")
 	{
 		apiv1.POST("/tags", tag.Create)

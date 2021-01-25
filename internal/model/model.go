@@ -4,12 +4,21 @@ import (
 	"fmt"
 	"ginblog_backend/global"
 	"ginblog_backend/pkg/setting"
+	"time"
+
 	//"gorm.io/driver/mysql"
 	//"gorm.io/gorm"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
+
+type Model struct {
+	ID        uint `gorm:"primary_key"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt *time.Time `sql:"index"`
+}
 
 func NewDBEngine(Databasesettings *setting.DatabaseSettingS) (*gorm.DB, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=%t&loc=Local", Databasesettings.Username, Databasesettings.Password, Databasesettings.Host, Databasesettings.Port, Databasesettings.DBName, Databasesettings.Charset, Databasesettings.ParseTime)
