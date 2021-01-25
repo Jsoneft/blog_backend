@@ -1,7 +1,10 @@
 package v1
 
 import (
+	"ginblog_backend/global"
 	_ "ginblog_backend/internal/model"
+	"ginblog_backend/pkg/app"
+	"ginblog_backend/pkg/errcode"
 	_ "ginblog_backend/pkg/errcode"
 	"github.com/gin-gonic/gin"
 )
@@ -22,7 +25,22 @@ func NewTag() Tag {
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags [get]
-func (t Tag) List(c *gin.Context) {}
+func (t Tag) List(c *gin.Context) {
+	param := struct {
+		Name  string `form:"name" binding:"max=100"`
+		State uint8  `form:"state,default=1" binding:"oneof=0 1"`
+	}{}
+	responser := app.NewResponse(c)
+	// Bind 一定要传指针
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid err = %v", errs)
+		responser.ToErrorResponse(errcode.InvalidParams.WithDetails("参数不合理"))
+		return
+	}
+	responser.ToResponse(gin.H{})
+	return
+}
 
 // @Summary 更新标签
 // @Produce json

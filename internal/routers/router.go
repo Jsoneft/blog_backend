@@ -2,6 +2,7 @@ package routers
 
 import (
 	_ "ginblog_backend/docs"
+	"ginblog_backend/internal/middleware"
 	v1 "ginblog_backend/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -10,6 +11,7 @@ import (
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(middleware.Translations())
 	tag := v1.NewTag()
 	article := v1.NewArticle()
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

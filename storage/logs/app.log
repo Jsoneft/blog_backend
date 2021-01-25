@@ -10,3 +10,17 @@
 2021/01/25 18:23:21 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611570201663900000}
 2021/01/25 18:38:20 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571100099403000}
 2021/01/25 18:48:02 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571682658103000}
+2021/01/25 19:00:52 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611572452368423000}
+2021/01/26 02:32:19 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611599539128524000}
+2021/01/26 02:34:31 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611599671234839000}
+2021/01/26 02:36:16 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611599776574346000}
+2021/01/26 02:38:20 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611599900699464000}
+2021/01/26 02:40:14 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611600014038844000}
+2021/01/26 02:54:35 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611600875009169000}
+2021/01/26 02:57:55 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611601075354478000}
+2021/01/26 02:58:42 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611601122748851000}
+2021/01/26 02:58:44 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"error","message":"app.BindAndValid err = [State必须是[0 1]中的一个]","time":1611601124791440000}
+2021/01/26 02:59:01 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"error","message":"app.BindAndValid err = [State必须是[0 1]中的一个]","time":1611601141012607000}
+2021/01/26 02:59:07 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"error","message":"app.BindAndValid err = [State必须是[0 1]中的一个]","time":1611601147167515000}
+2021/01/26 02:59:12 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611601152928658000}
+2021/01/26 02:59:21 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"error","message":"app.BindAndValid err = [State必须是[0 1]中的一个]","time":1611601161576784000}

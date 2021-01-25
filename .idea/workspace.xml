@@ -19,22 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="test: add test the swagger part&#10;&#10;expose the errcode.Error so that error message can show in swagger-ui, add comment to api/v1/article.go, move the gorm.Model to model.go so it can be recognized by swagger-ui, add swagger router">
-      <change afterPath="$PROJECT_DIR$/docs/docs.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/swagger.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/swagger.yaml" afterDir="false" />
+    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="feat: Add translated validator">
+      <change afterPath="$PROJECT_DIR$/pkg/app/form.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/article_tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/article_tag.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/model/tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/tag.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/routers/api/v1/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/api/v1/article.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/translation.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/translation.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/routers/api/v1/tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/api/v1/tag.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/errcode/errcode.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/errcode/errcode.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/app.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +179,10 @@
     <MESSAGE value="add general response" />
     <MESSAGE value="feat: add comment to v1/tag.go to fit in swagger-UI support" />
     <MESSAGE value="test: add test the swagger part&#10;&#10;expose the errcode.Error so that error message can show in swagger-ui, add comment to api/v1/article.go, move the gorm.Model to model.go so it can be recognized by swagger-ui, add swagger router" />
-    <option name="LAST_COMMIT_MESSAGE" value="test: add test the swagger part&#10;&#10;expose the errcode.Error so that error message can show in swagger-ui, add comment to api/v1/article.go, move the gorm.Model to model.go so it can be recognized by swagger-ui, add swagger router" />
+    <MESSAGE value="test: add validator to router" />
+    <MESSAGE value="squash! add logger.go" />
+    <MESSAGE value="feat: Add translated validator" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add translated validator" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -199,6 +193,25 @@
     </environment>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/app/form.go</url>
+          <line>44</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/pkg/app/form.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/routers/api/v1/tag.go</url>
+          <line>37</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
         <watch expression="global.ServerSetting" language="go" />
