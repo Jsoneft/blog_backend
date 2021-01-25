@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="feat: Add translated validator" />
+    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="Merge remote-tracking branch 'origin/0.1' into 0.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +185,8 @@
     <MESSAGE value="test: add validator to router" />
     <MESSAGE value="squash! add logger.go" />
     <MESSAGE value="feat: Add translated validator" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add translated validator" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/0.1' into 0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/0.1' into 0.1" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
