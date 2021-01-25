@@ -19,15 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="feat: Add translated validator">
-      <change afterPath="$PROJECT_DIR$/pkg/app/form.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/middleware/translation.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/translation.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/routers/api/v1/tag.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/api/v1/tag.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/app.log" afterDir="false" />
-    </list>
+    <list default="true" id="b3848cc9-7185-45b2-9213-03f6d328ac4e" name="Default Changelist" comment="feat: Add translated validator" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +49,7 @@
         </map>
       </branch-storage>
     </excluded-from-favorite>
+    <branch-grouping />
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -146,6 +139,16 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
