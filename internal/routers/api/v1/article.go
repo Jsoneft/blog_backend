@@ -31,9 +31,11 @@ func (a Article) List(c *gin.Context) {}
 
 // @Summary 更新文章
 // @Produce json
-// @Param id path int true "文章id"
-// @Param name body string true "文章名称" minlength(3) maxlength(100)
+// @Param title body string true "文章名称" minlength(3) maxlength(100)
+// @Param desc body string false "文章描述"
+// @Param content body string ture "文章内容"
 // @Param state body int false "状态" Enums(0, 1) default(1)
+// @Param cover_image_url body string false "封面图片链接" minlength(3) maxlength(100)
 // @Param modified_by body string false "修改者" minlength(3) maxlength(100)
 // @Success 200 {object} model.Article "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
@@ -52,9 +54,12 @@ func (a Article) Delete(c *gin.Context) {}
 
 // @Summary 新增文章
 // @Produce json
-// @Param name body string true "文章名称" minlength(3) maxlength(100)
+// @Param title body string true "文章名称" minlength(3) maxlength(100)
+// @Param desc body string false "文章描述"
+// @Param content body string ture "文章内容"
 // @Param state body int false "状态" Enums(0, 1) default(1)
 // @Param created_by body string false "创建者" minlength(3) maxlength(100)
+// @Param cover_image_url body string false "封面图片链接" minlength(3) maxlength(100)
 // @Success 200 {object} model.Article "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"

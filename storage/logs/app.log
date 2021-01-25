@@ -10,3 +10,4 @@
 2021/01/25 18:23:21 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611570201663900000}
 2021/01/25 18:38:20 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571100099403000}
 2021/01/25 18:48:02 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611571682658103000}
+2021/01/25 19:00:52 {"caller":["/Users/jason/go/src/ginblog_backend/main.go: 25 main.init.0"],"level":"info","message":"test of log","time":1611572452368423000}
