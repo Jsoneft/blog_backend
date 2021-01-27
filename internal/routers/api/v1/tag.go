@@ -1,8 +1,10 @@
 package v1
 
 import (
+	"fmt"
 	"ginblog_backend/global"
 	_ "ginblog_backend/internal/model"
+	"ginblog_backend/internal/service"
 	"ginblog_backend/pkg/app"
 	"ginblog_backend/pkg/errcode"
 	_ "ginblog_backend/pkg/errcode"
@@ -26,20 +28,18 @@ func NewTag() Tag {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags [get]
 func (t Tag) List(c *gin.Context) {
-	param := struct {
-		Name  string `form:"name" binding:"max=100"`
-		State uint8  `form:"state,default=1" binding:"oneof=0 1"`
-	}{}
-	responser := app.NewResponse(c)
+	param := service.GetTagByNameRequest{}
+	response := app.NewResponse(c)
 	// Bind 一定要传指针
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
-		global.Logger.Errorf("app.BindAndValid err = %v", errs)
-		responser.ToErrorResponse(errcode.InvalidParams.WithDetails("参数不合理"))
+		errmsg := fmt.Sprintf(" /api/v1/tags [get]  app.BindAndValid err = %v", errs)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
-	responser.ToResponse(gin.H{})
-	return
+	// TODO 2021/1/26 @Jason.Z tobe done.
+
 }
 
 // @Summary 更新标签
@@ -61,7 +61,19 @@ func (t Tag) Update(c *gin.Context) {}
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [delete]
-func (t Tag) Delete(c *gin.Context) {}
+func (t Tag) Delete(c *gin.Context) {
+	// 参数校验
+	param := service.DeleteTagRequest{}
+	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		errmsg := fmt.Sprintf("/api/v1/tags/{id} [delete] app.BindAndValid errs = %v", errs)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
+		return
+	}
+
+}
 
 // @Summary 新增标签
 // @Produce json
@@ -72,4 +84,16 @@ func (t Tag) Delete(c *gin.Context) {}
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags [post]
-func (t Tag) Create(c *gin.Context) {}
+func (t Tag) Create(c *gin.Context) {
+	// 参数校验
+	param := service.CreateTagRequest{}
+	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		errmsg := fmt.Sprintf("/api/v1/tags [post] app.BindAndValid errs = %v", errs)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
+		return
+	}
+
+}

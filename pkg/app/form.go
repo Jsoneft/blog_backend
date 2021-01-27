@@ -30,7 +30,7 @@ func (v ValidErrors) Errors() []string {
 	return errs
 }
 
-// BindAndValid 二次封装参校验方法，主要是报错后翻译
+// BindAndValid 二次封装参校验方法，翻译报错
 func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 	var errs ValidErrors
 	err := c.ShouldBind(v)
