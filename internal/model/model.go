@@ -14,9 +14,11 @@ import (
 )
 
 type Model struct {
-	ID        uint `gorm:"primary_key"`
+	ID        uint32 `gorm:"primary_key"`
 	CreatedAt time.Time
+	CreatedBy string
 	UpdatedAt time.Time
+	UpdatedBy string
 	DeletedAt *time.Time `sql:"index"`
 }
 

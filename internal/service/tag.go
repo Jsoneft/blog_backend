@@ -1,10 +1,11 @@
 package service
 
-type CountTagRequest struct {
-	State uint8 `form:"state,default=1" binding:"oneof=0 1"`
-}
+import (
+	"ginblog_backend/internal/model"
+	"ginblog_backend/pkg/app"
+)
 
-type GetTagByNameRequest struct {
+type CountTagRequest struct {
 	Name  string `form:"name" binding:"max=100"`
 	State uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
@@ -24,4 +25,29 @@ type UpdateTagRequest struct {
 
 type DeleteTagRequest struct {
 	ID uint32 `form:"id" binding:"required,gte=1"`
+}
+
+type TagListRequest struct {
+	Name  string `form:"name" binding:"max=100"`
+	State uint8  `form:"state,default=1" binding:"oneof=0 1"`
+}
+
+func (s *Service) CountTag(param *CountTagRequest) (int, error) {
+	return s.dao.CountTag(param.Name, param.State)
+}
+
+func (s *Service) GetTagList(param *TagListRequest, pager *app.Pager) ([]*model.Tag, error) {
+	return s.dao.GetTagList(param.Name, param.State, pager.Page, pager.PageSize)
+}
+
+func (s *Service) CreateTag(param *CreateTagRequest) error {
+	return s.dao.CreateTag(param.Name, param.State, param.CreatedBy)
+}
+
+func (s *Service) DeleteTag(param *DeleteTagRequest) error {
+	return s.dao.DeleteTag(param.ID)
+}
+
+func (s *Service) UpdateTag(param *UpdateTagRequest) error {
+	return s.dao.UpdateTag(param.ID, param.Name, param.ModifiedBy, param.State)
 }

@@ -28,7 +28,7 @@ func NewTag() Tag {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags [get]
 func (t Tag) List(c *gin.Context) {
-	param := service.GetTagByNameRequest{}
+	param := service.TagListRequest{}
 	response := app.NewResponse(c)
 	// Bind 一定要传指针
 	valid, errs := app.BindAndValid(c, &param)
@@ -38,8 +38,31 @@ func (t Tag) List(c *gin.Context) {
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
-	// TODO 2021/1/26 @Jason.Z tobe done.
 
+	svc := service.New(c.Request.Context())
+	pager := app.Pager{
+		Page:     app.GetPage(c),
+		PageSize: app.GetPageSize(c),
+	}
+	totalRows, err := svc.CountTag(&service.CountTagRequest{
+		Name:  param.Name,
+		State: param.State,
+	})
+	if err != nil {
+		errmsg := fmt.Sprintf(" /api/v1/tags [get]  svc.CountTag err = %v", err)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.ErrorCountTagFail.WithDetails(errmsg))
+		return
+	}
+	pager.TotalRows = totalRows
+	tags, err := svc.GetTagList(&param, &pager)
+	if err != nil {
+		errmsg := fmt.Sprintf(" /api/v1/tags [get]  svc.GetTagList err = %v", err)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.ErrorGetTagListFail.WithDetails(errmsg))
+		return
+	}
+	response.ToResponseList(tags, pager.TotalRows)
 }
 
 // @Summary 更新标签
@@ -52,7 +75,26 @@ func (t Tag) List(c *gin.Context) {
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [put]
-func (t Tag) Update(c *gin.Context) {}
+func (t Tag) Update(c *gin.Context) {
+	param := service.UpdateTagRequest{}
+	valid, errs := app.BindAndValid(c, &param)
+	response := app.NewResponse(c)
+	if !valid {
+		errmsg := fmt.Sprintf(" /api/v1/tags/{id} [put]  app.BindAndValid err = %v", errs)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
+		return
+	}
+	svc := service.New(c.Request.Context())
+	err := svc.UpdateTag(&param)
+	if err != nil {
+		errmsg := fmt.Sprintf(" /api/v1/tags/{id} [put]  svc.UpdateTag err = %v", err)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.ErrorUpdateTagFail.WithDetails(errmsg))
+		return
+	}
+	response.ToResponse(gin.H{})
+}
 
 // @Summary 删除标签
 // @Produce json
@@ -73,6 +115,15 @@ func (t Tag) Delete(c *gin.Context) {
 		return
 	}
 
+	svc := service.New(c.Request.Context())
+	err := svc.DeleteTag(&param)
+	if err != nil {
+		errmsg := fmt.Sprintf("/api/v1/tags/{id} [delete] svc.DeleteTag() errs = %v", err)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.ErrorDeleteTagFail.WithDetails(errmsg))
+		return
+	}
+	response.ToResponse(gin.H{})
 }
 
 // @Summary 新增标签
@@ -96,4 +147,13 @@ func (t Tag) Create(c *gin.Context) {
 		return
 	}
 
+	svc := service.New(c.Request.Context())
+	err := svc.CreateTag(&param)
+	if err != nil {
+		errmsg := fmt.Sprintf("/api/v1/tags [post] svc.CreateTag err = %v", err)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.ErrorCreateTagFail.WithDetails(errmsg))
+		return
+	}
+	response.ToResponse(gin.H{})
 }

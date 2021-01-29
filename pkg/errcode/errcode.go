@@ -16,6 +16,13 @@ var (
 	UnauthorizedTokenGenerate = NewError(10000006, "鉴权失败，Token生成失败")
 
 	TooManyRequests = NewError(10000007, " 请求过多")
+
+	// Tag类
+	ErrorGetTagListFail = NewError(20000000, "获取标签列表失败")
+	ErrorCreateTagFail  = NewError(20000001, "创建标签失败")
+	ErrorDeleteTagFail  = NewError(20000002, "删除标签失败")
+	ErrorUpdateTagFail  = NewError(20000003, "更新标签失败")
+	ErrorCountTagFail   = NewError(20000004, "统计标签失败")
 )
 
 type Error struct {
