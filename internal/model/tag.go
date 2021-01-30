@@ -56,5 +56,8 @@ func (a Tag) Delete(db *gorm.DB) error {
 }
 
 func (a Tag) Update(db *gorm.DB, values interface{}) error {
-	return db.Model(&Tag{}).Where("id = ? AND is_del = ?", a.ID, 0).Updates(&values).Error
+	if err := db.Model(&a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
+		return err
+	}
+	return nil
 }

@@ -1,6 +1,9 @@
 package model
 
-import "ginblog_backend/pkg/app"
+import (
+	"ginblog_backend/pkg/app"
+	"github.com/jinzhu/gorm"
+)
 
 type Article struct {
 	*Model
@@ -18,4 +21,11 @@ func (a Article) TableName() string {
 type ArticleSwagger struct {
 	List  []*Article
 	Pager *app.Pager
+}
+
+func (a Article) Create(db *gorm.DB) (*Article, error) {
+	if err := db.Model(&Article{}).Create(&a).Error; err != nil {
+		return nil, err
+	}
+	return &a, nil
 }

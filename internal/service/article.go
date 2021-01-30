@@ -1,5 +1,19 @@
 package service
 
+import (
+	"ginblog_backend/internal/model"
+)
+
+type Article struct {
+	ID            uint32     `json:"id"`
+	Title         string     `json:"title"`
+	Desc          string     `json:"desc"`
+	Content       string     `json:"content"`
+	CoverImageUrl string     `json:"cover_image_url"`
+	State         uint8      `json:"state"`
+	Tag           *model.Tag `json:"tag"`
+}
+
 type CreateArticleRequest struct {
 	TagId         uint32 `form:"tag_id" binding:"required, gte=1"`
 	Title         string `form:"title" binding:"required, min=2, max=100"`
@@ -34,3 +48,18 @@ type GetArticleByTagIdRequest struct {
 	TagId uint32 `form:"tag_id" binding:"required, gte=1"`
 	State uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
+
+//func (s Service) CreateArticle(param *CreateArticleRequest) error {
+//	article, err := s.dao.CreateArticle(&dao.Article{
+//		Title:         param.Title,
+//		Desc:          param.Desc,
+//		Content:       param.Content,
+//		CoverImageUrl: param.CoverImageUrl,
+//		CreatedBy:     param.CreatedBy,
+//		State:         param.State,
+//	})
+//	if err != nil {
+//		return err
+//	}
+//
+//}

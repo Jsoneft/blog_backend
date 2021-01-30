@@ -6,6 +6,7 @@ import (
 	_ "ginblog_backend/internal/model"
 	"ginblog_backend/internal/service"
 	"ginblog_backend/pkg/app"
+	"ginblog_backend/pkg/convert"
 	"ginblog_backend/pkg/errcode"
 	_ "ginblog_backend/pkg/errcode"
 	"github.com/gin-gonic/gin"
@@ -70,15 +71,15 @@ func (t Tag) List(c *gin.Context) {
 // @Param id path int true "标签ID"
 // @Param name body string ture "标签名称" minlength(3) maxlength(100)
 // @Param state body int false "状态" Enums(0, 1) default(1)
-// @Param modified_by body string false "修改者" minlength(3) maxlength(100)
+// @Param modified_by body string true "修改者" minlength(3) maxlength(100)
 // @Success 200 {object} model.Tag "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [put]
 func (t Tag) Update(c *gin.Context) {
-	param := service.UpdateTagRequest{}
-	valid, errs := app.BindAndValid(c, &param)
+	param := service.UpdateTagRequest{ID: convert.StrTo(c.Param("id")).MustUInt32()}
 	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf(" /api/v1/tags/{id} [put]  app.BindAndValid err = %v", errs)
 		global.Logger.Error(errmsg)
@@ -105,7 +106,7 @@ func (t Tag) Update(c *gin.Context) {
 // @Router /api/v1/tags/{id} [delete]
 func (t Tag) Delete(c *gin.Context) {
 	// 参数校验
-	param := service.DeleteTagRequest{}
+	param := service.DeleteTagRequest{ID: convert.StrTo(c.Param("id")).MustUInt32()}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {

@@ -1,6 +1,13 @@
 package v1
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"ginblog_backend/global"
+	"ginblog_backend/internal/service"
+	"ginblog_backend/pkg/app"
+	"ginblog_backend/pkg/errcode"
+	"github.com/gin-gonic/gin"
+)
 
 type Article struct{}
 
@@ -15,7 +22,20 @@ func NewArticle() Article {
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [get]
-func (a Article) Get(c *gin.Context) {}
+func (a Article) Get(c *gin.Context) {
+	param := service.GetArticleByIDRequest{}
+	valid, errs := app.BindAndValid(c, &param)
+	response := app.NewResponse(c)
+	if !valid {
+		errmsg := fmt.Sprintf("/api/v1/articles/{id} [get] app.BindAndValid err = %v", errs)
+		global.Logger.Error(errmsg)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
+		return
+	}
+
+	// svc := service.New(c.Request.Context())
+
+}
 
 // @Summary 获取多个文章
 // @Produce json

@@ -14,12 +14,13 @@ import (
 )
 
 type Model struct {
-	ID        uint32 `gorm:"primary_key"`
-	CreatedAt time.Time
-	CreatedBy string
-	UpdatedAt time.Time
-	UpdatedBy string
-	DeletedAt *time.Time `sql:"index"`
+	ID        uint32     `gorm:"primary_key"`
+	CreatedAt time.Time  `json:"created_at"`
+	CreatedBy string     `json:"created_by"`
+	UpdatedAt time.Time  `json:"updated_at"`
+	UpdatedBy string     `json:"updated_by"`
+	DeletedAt *time.Time `json:"deleted_at"  sql:"index"`
+	IsDel     uint8      `json:"is_del"`
 }
 
 func NewDBEngine(Databasesettings *setting.DatabaseSettingS) (*gorm.DB, error) {
@@ -40,6 +41,7 @@ func NewDBEngine(Databasesettings *setting.DatabaseSettingS) (*gorm.DB, error) {
 	db.Callback().Delete().Replace("gorm:delete", deleteCallBack)
 	db.DB().SetMaxIdleConns(Databasesettings.MaxIdleConns)
 	db.DB().SetMaxOpenConns(Databasesettings.MaxOpenConns)
+	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{})
 	return db, nil
 }
 
