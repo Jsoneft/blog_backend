@@ -23,6 +23,13 @@ var (
 	ErrorDeleteTagFail  = NewError(20000002, "删除标签失败")
 	ErrorUpdateTagFail  = NewError(20000003, "更新标签失败")
 	ErrorCountTagFail   = NewError(20000004, "统计标签失败")
+
+	// Article类
+	ErrorGetArticlesFail   = NewError(30000000, "获取文章列表失败")
+	ErrorGetArticleFail    = NewError(30000001, "获取文章列表失败")
+	ErrorCreateArticleFail = NewError(20000002, "创建文章失败")
+	ErrorDeleteArticleFail = NewError(20000003, "删除文章失败")
+	ErrorUpdateArticleFail = NewError(20000004, "更新文章失败")
 )
 
 type Error struct {

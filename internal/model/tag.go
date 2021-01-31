@@ -47,6 +47,16 @@ func (a Tag) List(db *gorm.DB, pageOffset, pageSize int) ([]*Tag, error) {
 	return res, nil
 }
 
+func (a Tag) Get(db *gorm.DB) (Tag, error) {
+	var tag Tag
+	err := db.Where("id = ? AND is_del = ? AND state = ?", a.ID, 0, a.State).First(&tag).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return tag, err
+	}
+
+	return tag, nil
+}
+
 func (a Tag) Create(db *gorm.DB) error {
 	return db.Model(&Tag{}).Create(&a).Error
 }
