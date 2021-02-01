@@ -45,7 +45,7 @@ func (t ArticleTag) Create(db *gorm.DB) error {
 
 // UpdateOne updates the row connected to the updated Article.
 func (t ArticleTag) UpdateOne(db *gorm.DB, values interface{}) error {
-	if err := db.Model(&t).Where("article_id = ? AND is_del = ?", t.ID, 0).Limit(1).Updates(&values).Error; err != nil && err != gorm.ErrRecordNotFound {
+	if err := db.Model(&t).Where("article_id = ? AND is_del = ?", t.ArticleId, 0).Limit(1).Updates(values).Error; err != nil && err != gorm.ErrRecordNotFound {
 		return err
 	}
 	return nil

@@ -31,7 +31,7 @@ func (a Article) Create(db *gorm.DB) (*Article, error) {
 }
 
 func (a Article) Update(db *gorm.DB, values interface{}) error {
-	if err := db.Model(&a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(&values).Error; err != nil {
+	if err := db.Model(&a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
 		return err
 	}
 	return nil
@@ -70,7 +70,7 @@ func (a Article) ListByTagID(db *gorm.DB, tagID uint32, pageOffset, pageSize int
 	}
 	fields := []string{"ar.id AS article_id", "ar.title AS article_title", "ar.desc AS article_desc", "ar.cover_image_url", "ar.content"}
 	fields = append(fields, []string{"t.id AS tag_id", "t.name AS tag_name"}...)
-	rows, err := db.Select(fields).Table(ArticleTag{}.TableName()+"AS at").
+	rows, err := db.Select(fields).Table(ArticleTag{}.TableName()+" AS at").
 		Joins("LEFT JOIN `"+Tag{}.TableName()+"` AS t ON at.tag_id = t.id").
 		Joins("LEFT JOIN `"+Article{}.TableName()+"` AS ar ON at.article_id = ar.id").
 		Where("at.`tag_id` = ? AND ar.state = ? AND ar.is_del = ?", tagID, a.State, 0).Rows()
@@ -82,7 +82,7 @@ func (a Article) ListByTagID(db *gorm.DB, tagID uint32, pageOffset, pageSize int
 	var articleRows []*ArticleRow
 	for rows.Next() {
 		r := ArticleRow{}
-		if err := rows.Scan(&r.ArticleID, &r.ArticleTitle, &r.ArticleDesc, &r.TagID, &r.TagName); err != nil {
+		if err := rows.Scan(&r.ArticleID, &r.ArticleTitle, &r.ArticleDesc, &r.CoverImageUrl, &r.Content, &r.TagID, &r.TagName); err != nil {
 			return nil, err
 		}
 		articleRows = append(articleRows, &r)
@@ -92,7 +92,7 @@ func (a Article) ListByTagID(db *gorm.DB, tagID uint32, pageOffset, pageSize int
 
 func (a Article) CountByTagId(db *gorm.DB, tagID uint32) (int, error) {
 	var cnt int
-	err := db.Table(ArticleTag{}.TableName()+"AS at").
+	err := db.Table(ArticleTag{}.TableName()+" AS at").
 		Joins("LEFT JOIN `"+Tag{}.TableName()+"`AS t ON at.tag_id = t.id").
 		Joins("LEFT JOIN `"+Article{}.TableName()+"` AS ar ON at.article_id = ar.id").
 		Where("at.tag_id = ? AND ar.state = ? AND ar.is_del = ?", tagID, a.State, 0).
