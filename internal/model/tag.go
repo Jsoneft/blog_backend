@@ -66,6 +66,7 @@ func (a Tag) Delete(db *gorm.DB) error {
 }
 
 func (a Tag) Update(db *gorm.DB, values interface{}) error {
+	// gorm.DB.Updates 不能传指针 不然不符合 转map[string]interface{}逻辑 会被ignore掉
 	if err := db.Model(&a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
 		return err
 	}

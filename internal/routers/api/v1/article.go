@@ -5,6 +5,7 @@ import (
 	"ginblog_backend/global"
 	"ginblog_backend/internal/service"
 	"ginblog_backend/pkg/app"
+	"ginblog_backend/pkg/convert"
 	"ginblog_backend/pkg/errcode"
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +24,7 @@ func NewArticle() Article {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [get]
 func (a Article) Get(c *gin.Context) {
-	param := service.ArticleRequest{}
+	param := service.ArticleRequest{ID: convert.StrTo(c.Param("id")).MustUInt32()}
 	valid, errs := app.BindAndValid(c, &param)
 	response := app.NewResponse(c)
 	if !valid {
@@ -35,7 +36,7 @@ func (a Article) Get(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	articles, err := svc.GetArticle(&param)
 	if err != nil {
-		errmsg := fmt.Sprintf("/api/v1/articles/{id} [get] svc.GetArticle err = %v", errs)
+		errmsg := fmt.Sprintf("/api/v1/articles/{id} [get] svc.GetArticle err = %v", err)
 		global.Logger.Error(errmsg)
 		response.ToErrorResponse(errcode.ErrorGetArticleFail.WithDetails(errmsg))
 		return
@@ -70,13 +71,13 @@ func (a Article) List(c *gin.Context) {
 	}
 	articles, totalRows, err := svc.GetArticleList(&param, pager)
 	if err != nil {
-		errmsg := fmt.Sprintf("/api/v1/articles [get] svc.GetArticleList err = %v", errs)
+		errmsg := fmt.Sprintf("/api/v1/articles [get] svc.GetArticleList err = %v", err)
 		global.Logger.Error(errmsg)
 		response.ToErrorResponse(errcode.ErrorGetArticlesFail.WithDetails(errmsg))
 		return
 	}
 	pager.TotalRows = totalRows
-	response.ToResponse(articles)
+	response.ToResponseList(articles, pager.TotalRows)
 }
 
 // @Summary 更新文章
@@ -92,7 +93,7 @@ func (a Article) List(c *gin.Context) {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [put]
 func (a Article) Update(c *gin.Context) {
-	param := service.UpdateArticleRequest{}
+	param := service.UpdateArticleRequest{ID: convert.StrTo(c.Param("id")).MustUInt32()}
 	valid, errs := app.BindAndValid(c, &param)
 	response := app.NewResponse(c)
 	if !valid {
@@ -104,7 +105,7 @@ func (a Article) Update(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	err := svc.UpdateArticle(&param)
 	if err != nil {
-		errmsg := fmt.Sprintf("/api/v1/articles/{id} [put] svc.UpdateArticle err = %v", errs)
+		errmsg := fmt.Sprintf("/api/v1/articles/{id} [put] svc.UpdateArticle err = %v", err)
 		global.Logger.Error(errmsg)
 		response.ToErrorResponse(errcode.ErrorUpdateArticleFail.WithDetails(errmsg))
 		return
@@ -120,7 +121,7 @@ func (a Article) Update(c *gin.Context) {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [delete]
 func (a Article) Delete(c *gin.Context) {
-	param := service.DeleteArticleRequest{}
+	param := service.DeleteArticleRequest{ID: convert.StrTo(c.Param("id")).MustUInt32()}
 	valid, errs := app.BindAndValid(c, &param)
 	response := app.NewResponse(c)
 	if !valid {
@@ -132,7 +133,7 @@ func (a Article) Delete(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	err := svc.DeleteArticle(&param)
 	if err != nil {
-		errmsg := fmt.Sprintf("/api/v1/articles/{id} [delete] svc.DeleteArticle err = %v", errs)
+		errmsg := fmt.Sprintf("/api/v1/articles/{id} [delete] svc.DeleteArticle err = %v", err)
 		global.Logger.Error(errmsg)
 		response.ToErrorResponse(errcode.ErrorDeleteArticleFail.WithDetails(errmsg))
 		return
@@ -140,14 +141,15 @@ func (a Article) Delete(c *gin.Context) {
 	response.ToResponse(gin.H{})
 }
 
-// @Summary 新增文章
+// @Summary 创建文章
 // @Produce json
-// @Param title body string true "文章名称" minlength(3) maxlength(100)
-// @Param desc body string false "文章描述"
-// @Param content body string ture "文章内容"
-// @Param state body int false "状态" Enums(0, 1) default(1)
-// @Param created_by body string false "创建者" minlength(3) maxlength(100)
-// @Param cover_image_url body string false "封面图片链接" minlength(3) maxlength(100)
+// @Param tag_id body string true "标签ID"
+// @Param title body string true "文章标题"
+// @Param desc body string false "文章简述"
+// @Param cover_image_url body string true "封面图片地址"
+// @Param content body string true "文章内容"
+// @Param created_by body int true "创建者"
+// @Param state body int false "状态"
 // @Success 200 {object} model.Article "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
@@ -165,7 +167,7 @@ func (a Article) Create(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	err := svc.CreateArticle(&param)
 	if err != nil {
-		errmsg := fmt.Sprintf("/api/v1/articles [post] svc.CreateArticle err = %v", errs)
+		errmsg := fmt.Sprintf("/api/v1/articles [post] svc.CreateArticle err = %v", err)
 		global.Logger.Error(errmsg)
 		response.ToErrorResponse(errcode.ErrorCreateArticleFail.WithDetails(errmsg))
 		return
