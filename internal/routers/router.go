@@ -3,6 +3,7 @@ package routers
 import (
 	_ "ginblog_backend/docs"
 	"ginblog_backend/internal/middleware"
+	"ginblog_backend/internal/routers/api"
 	v1 "ginblog_backend/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -14,7 +15,11 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.Translations())
 	tag := v1.NewTag()
 	article := v1.NewArticle()
+	upload := api.NewUpload()
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.POST("/upload/file", upload.UploadFile)
+
 	apiv1 := r.Group("/api/v1")
 	{
 		apiv1.POST("/tags", tag.Create)

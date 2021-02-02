@@ -6,7 +6,8 @@ import (
 )
 
 var (
-	Success                   = NewError(0, "Success!")
+	Success = NewError(0, "Success!")
+
 	ServerError               = NewError(10000000, "服务器内部错误")
 	InvalidParams             = NewError(10000001, "入参错误")
 	NotFound                  = NewError(10000002, "找不到")
@@ -14,8 +15,7 @@ var (
 	UnauthorizedTokenError    = NewError(10000004, "鉴权失败，Token错误")
 	UnauthorizedTokenTimeout  = NewError(10000005, "鉴权失败，Token超时")
 	UnauthorizedTokenGenerate = NewError(10000006, "鉴权失败，Token生成失败")
-
-	TooManyRequests = NewError(10000007, " 请求过多")
+	TooManyRequests           = NewError(10000007, " 请求过多")
 
 	// Tag类
 	ErrorGetTagListFail = NewError(20000000, "获取标签列表失败")
@@ -30,6 +30,9 @@ var (
 	ErrorCreateArticleFail = NewError(30000002, "创建文章失败")
 	ErrorDeleteArticleFail = NewError(30000003, "删除文章失败")
 	ErrorUpdateArticleFail = NewError(30000004, "更新文章失败")
+
+	// uploadErr
+	ErrorUploadFileFail = NewError(40000000, "上传文件失败")
 )
 
 type Error struct {
