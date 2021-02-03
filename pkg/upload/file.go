@@ -37,7 +37,7 @@ func CheckSavePathExisted(dst string) bool {
 	return os.IsNotExist(err)
 }
 
-func CheckIsPermission(dst string) bool {
+func CheckIsPermissionDenied(dst string) bool {
 	_, err := os.Stat(dst)
 	return os.IsPermission(err)
 }
