@@ -18,7 +18,7 @@ func NewRouter() *gin.Engine {
 	tag := v1.NewTag()
 	article := v1.NewArticle()
 	upload := api.NewUpload()
-
+	r.GET("/auth", api.GetAuth)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.POST("/upload/file", upload.UploadFile)
 	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))

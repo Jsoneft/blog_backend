@@ -46,7 +46,7 @@ func NewDBEngine(Databasesettings *setting.DatabaseSettingS) (*gorm.DB, error) {
 	db.Callback().Delete().Replace("gorm:delete", deleteCallBack)
 	db.DB().SetMaxIdleConns(Databasesettings.MaxIdleConns)
 	db.DB().SetMaxOpenConns(Databasesettings.MaxOpenConns)
-	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{})
+	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{}, &Auth{})
 	return db, nil
 }
 
