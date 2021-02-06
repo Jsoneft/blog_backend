@@ -66,7 +66,7 @@ func (l *Logger) WithLevel(lvl Level) *Logger {
 	return ll
 }
 
-// WithContent 设置日志公共字段
+// WithFields 设置日志公共字段
 func (l *Logger) WithFields(f Fields) *Logger {
 	ll := l.clone()
 	if ll.fields == nil {
