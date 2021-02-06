@@ -37,10 +37,20 @@ type DatabaseSettingS struct {
 	MaxOpenConns int
 }
 
-type JWTSettings struct {
+type JWTSettingS struct {
 	Secret string
 	Issuer string
 	Expire time.Duration
+}
+
+type EmailSettingS struct {
+	Host     string
+	Port     int
+	UserName string
+	PassWord string
+	IsSSL    bool
+	From     string
+	To       []string
 }
 
 func (a *Setting) ReadSection(k string, v interface{}) error {
