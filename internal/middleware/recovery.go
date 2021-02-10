@@ -26,7 +26,7 @@ func Recovery() gin.HandlerFunc {
 				global.Logger.WithCallersFrame().Errorf("panic recover err: %v", err)
 				err := defaultMailer.SendMail(
 					global.EmailSetting.To,
-					fmt.Sprintf("来自ZJX的Panic提醒服务 异常抛出， 发生时间: %v", time.Now().Unix()),
+					fmt.Sprintf("来自ZJX的Panic提醒服务 于:%v 抛出异常", time.Now()),
 					fmt.Sprintf("错误信息 err: %v", err),
 				)
 				if err != nil {
@@ -36,6 +36,8 @@ func Recovery() gin.HandlerFunc {
 				c.Abort()
 			}
 		}()
+		// panic Mail test
+		//log.Panicf("panic err = %v", "test")
 		c.Next()
 	}
 }

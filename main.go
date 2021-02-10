@@ -50,6 +50,7 @@ func main() {
 		ConnContext:       nil,
 	}
 	global.Logger.Infof("test of log")
+
 	s.ListenAndServe()
 
 }

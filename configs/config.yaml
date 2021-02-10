@@ -32,3 +32,12 @@ JWT:
   Secret: JarvisZuo
   Issuer: blog-service
   Expire: 7200
+Email:
+  Host: mail.zuojiaxun.cn
+  Port: 465
+  UserName: no-reply@zuojiaxun.cn
+  PassWord: A3SZF`6Tn5
+  IsSSL: true
+  From: no-reply@zuojiaxun.cn
+  To:
+    - jasonleft@qq.com
