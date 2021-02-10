@@ -6,16 +6,28 @@ import (
 	"ginblog_backend/internal/middleware"
 	"ginblog_backend/internal/routers/api"
 	v1 "ginblog_backend/internal/routers/api/v1"
+	"ginblog_backend/pkg/limiter"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	"net/http"
+	"time"
+)
+
+// 认证接口限流每秒十个
+var methodLimiters = limiter.NewMethodLimiter().AddBuckets(
+	limiter.BucketRule{
+		Key:          "/auth",
+		FillInterval: time.Second,
+		Capacity:     10,
+		Quantum:      10,
+	},
 )
 
 func NewRouter() *gin.Engine {
 	gin.Default()
 	r := gin.New()
-	r.Use(middleware.AccessLog(), middleware.Recovery(), middleware.Translations())
+	r.Use(middleware.AccessLog(), middleware.Recovery(), middleware.Translations(), middleware.AppInfo(), middleware.RateLimiter(methodLimiters))
 	tag := v1.NewTag()
 	article := v1.NewArticle()
 	upload := api.NewUpload()
