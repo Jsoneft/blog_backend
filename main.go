@@ -6,6 +6,7 @@ import (
 	"ginblog_backend/internal/routers"
 	"ginblog_backend/pkg/logger"
 	"ginblog_backend/pkg/setting"
+	"ginblog_backend/pkg/tracer"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"log"
@@ -25,6 +26,10 @@ func init() {
 	err = setupLogger()
 	if err != nil {
 		log.Fatalf("init.setupLogger error = %v", err)
+	}
+	err = setupTracer()
+	if err != nil {
+		log.Fatalf("init.setupTracer error = %v", err)
 	}
 }
 
@@ -106,5 +111,14 @@ func setupLogger() error {
 		LocalTime: true,
 		Compress:  false,
 	}, "", log.LstdFlags).WithCaller(2)
+	return nil
+}
+
+func setupTracer() error {
+	jaegerTracer, _, err := tracer.NewJeagerTracer("blog-service", "127.0.0.1/6831")
+	if err != nil {
+		return err
+	}
+	global.Tracer = jaegerTracer
 	return nil
 }

@@ -27,6 +27,7 @@ var methodLimiters = limiter.NewMethodLimiter().AddBuckets(
 func NewRouter() *gin.Engine {
 	gin.Default()
 	r := gin.New()
+	r.Use(middleware.Tracing())
 	r.Use(middleware.AccessLog(), middleware.Recovery(), middleware.Translations(), middleware.AppInfo(), middleware.RateLimiter(methodLimiters), middleware.ContextTimeout())
 	tag := v1.NewTag()
 	article := v1.NewArticle()
