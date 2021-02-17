@@ -115,7 +115,7 @@ func setupLogger() error {
 }
 
 func setupTracer() error {
-	jaegerTracer, _, err := tracer.NewJeagerTracer("blog-service", "127.0.0.1/6831")
+	jaegerTracer, _, err := tracer.NewJaegerTracer("blog-service", "127.0.0.1:6831")
 	if err != nil {
 		return err
 	}
