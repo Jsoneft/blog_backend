@@ -35,7 +35,7 @@ func (t Tag) List(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf(" /api/v1/tags [get]  app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -51,7 +51,7 @@ func (t Tag) List(c *gin.Context) {
 	})
 	if err != nil {
 		errmsg := fmt.Sprintf(" /api/v1/tags [get]  svc.CountTag err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorCountTagFail.WithDetails(errmsg))
 		return
 	}
@@ -59,7 +59,7 @@ func (t Tag) List(c *gin.Context) {
 	tags, err := svc.GetTagList(&param, &pager)
 	if err != nil {
 		errmsg := fmt.Sprintf(" /api/v1/tags [get]  svc.GetTagList err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorGetTagListFail.WithDetails(errmsg))
 		return
 	}
@@ -82,7 +82,7 @@ func (t Tag) Update(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf(" /api/v1/tags/{id} [put]  app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -90,7 +90,7 @@ func (t Tag) Update(c *gin.Context) {
 	err := svc.UpdateTag(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf(" /api/v1/tags/{id} [put]  svc.UpdateTag err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorUpdateTagFail.WithDetails(errmsg))
 		return
 	}
@@ -111,7 +111,7 @@ func (t Tag) Delete(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/tags/{id} [delete] app.BindAndValid errs = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -120,7 +120,7 @@ func (t Tag) Delete(c *gin.Context) {
 	err := svc.DeleteTag(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/tags/{id} [delete] svc.DeleteTag() errs = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorDeleteTagFail.WithDetails(errmsg))
 		return
 	}
@@ -143,7 +143,7 @@ func (t Tag) Create(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/tags [post] app.BindAndValid errs = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -152,7 +152,7 @@ func (t Tag) Create(c *gin.Context) {
 	err := svc.CreateTag(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/tags [post] svc.CreateTag err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorCreateTagFail.WithDetails(errmsg))
 		return
 	}

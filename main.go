@@ -54,7 +54,6 @@ func main() {
 		BaseContext:       nil,
 		ConnContext:       nil,
 	}
-	global.Logger.Infof("test of log")
 
 	s.ListenAndServe()
 

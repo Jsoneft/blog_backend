@@ -29,7 +29,7 @@ func (a Article) Get(c *gin.Context) {
 	response := app.NewResponse(c)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [get] app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -37,7 +37,7 @@ func (a Article) Get(c *gin.Context) {
 	articles, err := svc.GetArticle(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [get] svc.GetArticle err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorGetArticleFail.WithDetails(errmsg))
 		return
 	}
@@ -60,7 +60,7 @@ func (a Article) List(c *gin.Context) {
 	response := app.NewResponse(c)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/articles [get] app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -72,7 +72,7 @@ func (a Article) List(c *gin.Context) {
 	articles, totalRows, err := svc.GetArticleList(&param, pager)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/articles [get] svc.GetArticleList err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorGetArticlesFail.WithDetails(errmsg))
 		return
 	}
@@ -98,7 +98,7 @@ func (a Article) Update(c *gin.Context) {
 	response := app.NewResponse(c)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [put] app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -106,7 +106,7 @@ func (a Article) Update(c *gin.Context) {
 	err := svc.UpdateArticle(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [put] svc.UpdateArticle err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorUpdateArticleFail.WithDetails(errmsg))
 		return
 	}
@@ -126,7 +126,7 @@ func (a Article) Delete(c *gin.Context) {
 	response := app.NewResponse(c)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [delete] app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -134,7 +134,7 @@ func (a Article) Delete(c *gin.Context) {
 	err := svc.DeleteArticle(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/articles/{id} [delete] svc.DeleteArticle err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorDeleteArticleFail.WithDetails(errmsg))
 		return
 	}
@@ -160,7 +160,7 @@ func (a Article) Create(c *gin.Context) {
 	response := app.NewResponse(c)
 	if !valid {
 		errmsg := fmt.Sprintf("/api/v1/articles [post] app.BindAndValid err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -168,7 +168,7 @@ func (a Article) Create(c *gin.Context) {
 	err := svc.CreateArticle(&param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/api/v1/articles [post] svc.CreateArticle err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorCreateArticleFail.WithDetails(errmsg))
 		return
 	}

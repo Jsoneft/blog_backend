@@ -23,7 +23,7 @@ func GetAuth(c *gin.Context) {
 	valid, errs := app.BindAndValid(c, &param)
 	if !valid {
 		errmsg := fmt.Sprintf("/auth [get] c.Request.FormFile err = %v", errs)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -31,7 +31,7 @@ func GetAuth(c *gin.Context) {
 	err := svc.CheckAuth(param)
 	if err != nil {
 		errmsg := fmt.Sprintf("/auth [get] svc.CheckAuth err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.UnauthorizedTokenError.WithDetails(errmsg))
 		return
 	}
@@ -39,7 +39,7 @@ func GetAuth(c *gin.Context) {
 	token, err := app.GenerateToken(param.AppKey, param.AppSecret)
 	if err != nil {
 		errmsg := fmt.Sprintf("/auth [get] app.GenerateToken err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.UnauthorizedTokenGenerate.WithDetails(errmsg))
 		return
 	}

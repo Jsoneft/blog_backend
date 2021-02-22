@@ -11,6 +11,8 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+
+	otgorm "github.com/eddycjy/opentracing-gorm"
 )
 
 type Model struct {
@@ -46,6 +48,7 @@ func NewDBEngine(Databasesettings *setting.DatabaseSettingS) (*gorm.DB, error) {
 	db.Callback().Delete().Replace("gorm:delete", deleteCallBack)
 	db.DB().SetMaxIdleConns(Databasesettings.MaxIdleConns)
 	db.DB().SetMaxOpenConns(Databasesettings.MaxOpenConns)
+	otgorm.AddGormCallbacks(db)
 	db.AutoMigrate(&Tag{}, &Article{}, &ArticleTag{}, &Auth{})
 	return db, nil
 }

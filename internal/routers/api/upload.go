@@ -31,7 +31,7 @@ func (u Upload) UploadFile(c *gin.Context) {
 	file, fileHeader, err := c.Request.FormFile("file")
 	if err != nil {
 		errmsg := fmt.Sprintf("/upload/file [post] c.Request.FormFile err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errmsg))
 		return
 	}
@@ -44,7 +44,7 @@ func (u Upload) UploadFile(c *gin.Context) {
 	fileInfo, err := svc.UploadFile(upload.FileType(fileType), file, fileHeader)
 	if err != nil {
 		errmsg := fmt.Sprintf("/upload/file [post] svc.UploadFile err = %v", err)
-		global.Logger.Error(errmsg)
+		global.Logger.Error(c, errmsg)
 		response.ToErrorResponse(errcode.ErrorUploadFileFail.WithDetails(errmsg))
 		return
 	}
